@@ -1,6 +1,6 @@
 <p align="center">
 <img src="./.github/assets/itgam_cover.png"
-alt= "Logo>
+alt= "Logo">
 </p>
 
 # Desarrollo web SSR - 2026A
