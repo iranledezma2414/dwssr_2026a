@@ -18,7 +18,7 @@ Documentar los sprints del proyecto que se desarrollaran a lo largo del curso.
 
 ## Ramas del proyecto
 
- - `dev`: Rama de desarrollo 
+ - `dev`: Rama de desarrollo!
  - `main`: Rama principal
 
  ## Convenciones de commits 
@@ -43,5 +43,5 @@ Documentar los sprints del proyecto que se desarrollaran a lo largo del curso.
 
  [Irán Ledezma](https://github.com/iranledezma2414)
 
- 
+
  
