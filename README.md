@@ -39,6 +39,12 @@ Documentar los sprints del proyecto que se desarrollaran a lo largo del curso.
  **Ejemplo**: 
  >feat ✨: Agrega automatización de usuarios
 
+ # 📚 stack
+
+
+ ## BACK-END
+ - [Node](./.github/doc/node.md)
+
  # 👨‍🦰 Autor 
 
  [Irán Ledezma](https://github.com/iranledezma2414)
