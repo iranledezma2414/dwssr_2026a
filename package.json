@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
-  
   "scripts": {
     "start": "DEBUG=dwssr-2026a:* node ./bin/www"
   },
@@ -14,5 +13,8 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
