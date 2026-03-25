@@ -9,7 +9,6 @@ import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import authorRouter from './routes/author.js';
 
-// Recreando __dirname que no existe por defecto en ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -24,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Ajustamos el ../ porque app.js ahora está dentro de server/
+
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', indexRouter);
