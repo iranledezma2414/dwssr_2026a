@@ -19,7 +19,7 @@ export default defineConfig({
   // Configuración del build
   build: {   
     // directorio de salida para los archivos construidos
-    outdir: '../dist',
+    outDir: '../dist',
     emptyOutDir: true,
     // generando manifiesto
     manifest: true,

@@ -11,7 +11,7 @@ import indexRouter from '#routes/index.js';
 import usersRouter from '#routes/users.js';
 import authorRouter from '#routes/author.js';
 // Importando el registrador de Helpers
-import { registerViteHelper } from './lib/vite.js';
+import { registerViteHelper } from '../lib/vite.js';
 
 // Recreando variable de path
 const __filename = fileURLToPath(import.meta.url);
