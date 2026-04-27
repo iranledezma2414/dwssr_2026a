@@ -3,11 +3,13 @@ import express from 'express';
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Proyecto increible ✨',
+// eslint-disable-next-line no-unused-vars
+router.get('/', function (req, res, next) {
+  res.render('index', {
+    title: 'Proyecto increible ✨',
     author: 'Irán Ledezma'
-   });
-  
+  });
+
 });
 
 // module.exports = router;

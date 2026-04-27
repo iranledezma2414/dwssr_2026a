@@ -5,6 +5,7 @@
  */
 
 import app from '../app.js';
+// eslint-disable-next-line no-unused-vars
 import createDebug from 'debug';
 import http from 'node:http';
 

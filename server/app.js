@@ -31,22 +31,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // Archivos estaticos de Vite
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname,'..','dist')));
+  app.use(express.static(path.join(__dirname, '..', 'dist')));
 }
 //Archivo estatico del backend
-app.use(express.static(path.join(__dirname,'...', 'public')));
+app.use(express.static(path.join(__dirname, '...', 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/author', authorRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+// eslint-disable-next-line no-unused-vars
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
