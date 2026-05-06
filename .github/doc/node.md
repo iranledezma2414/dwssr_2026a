@@ -1,8 +1,8 @@
-# 🟩 Node 
- 
+# 🟩 Node
+
 [Node] (https://nodejs.org/es) es un entorno de ejeccución multiplataforma de codigo abierto y gratis.
 
-Dentro de los frameworks para crear servidores web para Node tenemos: 
+Dentro de los frameworks para crear servidores web para Node tenemos:
 
 - [Fastify](https://fastify.dev/)
 - [AdonisJs](https://adonisjs.com/)
@@ -14,12 +14,12 @@ Dentro de los frameworks para crear servidores web para Node tenemos:
 
 Express es un _framework_ para Node,
 minimo, flexible no es impositivo tanto
-en el flujo de trabajo como en la 
+en el flujo de trabajo como en la
 arquitectura del proyecto.
 
 El presente proyecto está desarrollado en ExpressJs
 
-# 📦 ESM 
+# 📦 ESM
 
 Los ECMAScrip Modules (ESM) representan el estándar nativo
 para organizar y modularizar código de Javascript.
@@ -29,7 +29,7 @@ el nuevo estándar llamado usa `export/import`.
 
 Migrar a ESM ofrece las siguientes ventajas:
 
-- Sintaxis  moderna y consistente
+- Sintaxis moderna y consistente
 - Mejor análisis estático
 - Importaciones asíncronas con `import()`
 - Es el futuro del ecosistema.
@@ -38,21 +38,29 @@ Migrar a ESM ofrece las siguientes ventajas:
 
 [Nodemon] (https://nodemon.io/) es un paquete que actua como
 un _wrapper_ (envoltorio) para Node.Js
-Su función es observar archivos en el 
+Su función es observar archivos en el
 directorio de tu proyecto y reiniciar
 automaticamente la aplicación cuando
 detecta cambios guardados.
 
 # ✂️ Aliases
 
-Los **imports alisases** también conocidos como _path aliases_ o _module aliases_ 
+Los **imports alisases** también conocidos como _path aliases_ o _module aliases_
 son atajos o alias que podemos configurar para simplificar la forma en que importamos
 modulos en que importamos modulos en nuestra aplicación.
 
-# Tarea 
+# Tarea
+
 mover los siguientes archivos y directorios al directorio
 _server_:
-* 📁 bin
-* 📁 routes
-* 📁 views
-* 📄 app.js
+
+- 📁 bin
+- 📁 routes
+- 📁 views
+- 📄 app.js
+
+# Loggers
+
+winston-daily-rotate-file es un transporte de winston
+que permite la rotación automatica de archivos de logs
+basada en fechas
