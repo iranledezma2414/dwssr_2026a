@@ -1,12 +1,14 @@
 body {
-    padding: 50px;
-    font: 14px "Lucinda Grande", Helvetica;
+  padding: 50px;
+  font:
+    14px "Lucinda Grande",
+    Helvetica;
 }
 
 h1 {
-    color: teal;
+  color: teal;
 }
 
-button {
-    margin-top: 20px;
+button p {
+  margin-top: 20px;
 }
