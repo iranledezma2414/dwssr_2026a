@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import { fileURLToPath } from "url";
 import hbs from "hbs";
-
+import logger from "./lib/winston.js";
 // Importando enrutadores
 import indexRouter from "#routes/index.js";
 import usersRouter from "#routes/users.js";
@@ -25,7 +25,14 @@ app.set("view engine", "hbs");
 // Registrando el Helper para el ENGINE
 registerViteHelper(hbs);
 
-app.use(morgan("dev"));
+// Redirgiendo el flujo de logs de morgan a winston
+app.use(
+  morgan("dev", {
+    stream: {
+      write: (msg) => logger.info(msg.trim()),
+    },
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

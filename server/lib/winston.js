@@ -2,25 +2,26 @@
 import winston, { format } from "winston";
 import path from "node:path";
 import fs from "node:fs";
-// Importando biblioteca de transporte
-const { transports } = winston;
+//importando biblioteca de transporte
+import DailyRotateFile from "winston-daily-rotate-file";
 
-// Desestructurando funciones de format
+// desestructurando funciones de format
 const { combine, timestamp, label, printf, colorize, prettyPrint } = format;
 
-// Creando los directorios raiz
-const __rootDir = path.resolve(process.cwd());
+// creando los directorios raiz
+const __rootdir = path.resolve(process.cwd());
 
-//Creando la ruta del directorio de logs en la raiz del proyecto
+// creando la ruta del directorio de logs en
 // la raiz del proyecto
-const logsDir = path.join(__rootDir, "logs");
-// Rutina que  crea la carpeta donde iran los logs solo
+const logsDir = path.join(__rootdir, "logs");
+
+// rutina que crea la carpeta donde iran los logs solo
 // en caso de no existir
 if (!fs.existsSync(logsDir)) {
   fs.mkdirSync(logsDir, { recursive: true });
 }
 
-// Definiendo esquema de colores
+// definiendo esquema de colores
 const colors = {
   error: "red",
   warn: "yellow",
@@ -29,39 +30,38 @@ const colors = {
   debug: "blue",
 };
 
-// Agregando esquema de  olores a winston
+// Agregando esquema de colores a winston
 winston.addColors(colors);
 
-// Creamos los formatos de salida para los diferentes transportes
-const myconsoleFormat = combine(
-  // Agregando colores a la salida de consola
+//creamos los formatos de salida para los diferentes transporetes
+const myConsoleFormat = combine(
+  //agregando colores a este formato
   colorize({ all: true }),
-  // Agregando una etiqueta a log
-  label({ label: "🎙️" }),
-  // Agregando formato de fecha
+  //agregar una etiqueta log
+  label({ label: "📢" }),
+  //agrego formato de fecha
   timestamp({ format: "DD-MM-YYYY HH:mm:ss" }),
-  // Función de impresion
+  //agrego formato de impresión
   printf(
-    (info) => `${info.timestamp} ${info.label} ${info.level}: ${info.message}`,
+    (info) => `${info.level}: ${info.label} ${info.timestamp} ${info.message}`,
   ),
 );
 
-// Formato para los archivos de logs
+// formato para los archivos
 const myFileFormat = combine(
-  // Quitando la colorización
+  //quitando colorizacion
   format.uncolorize(),
-  // Agregamos fecha en formado ISO
+  //agregamos fecha en formato ISO
   timestamp(),
-  // Salida en formato JSON
+  //salida en formato JSON
   format.json(),
 );
 
-// Creando los transportes
 // Creando el objeto de opciones para cada transporte
 const options = {
   errorFile: {
     level: "error",
-    filename: path.join(__rootDir, "logs", "error.log"),
+    filename: path.join(__rootdir, "logs", "error.log"),
     maxsize: 5242880, // 5MB
     maxFiles: 5,
     format: myFileFormat,
@@ -92,3 +92,39 @@ const options = {
     format: myFileFormat,
   },
 };
+
+// creando una instancia del logger
+/*
+Usaremos un transport diario (DailyRotateFile) para el log principal,
+esto facilita la retencion por fecha y la compresion de archivos
+
+Para los demas logs mantenemos archivos separados 
+*/
+
+const logger = winston.createLogger({
+  transports: [
+    //log principal con rotacion por fecha
+    new DailyRotateFile(options.dailyRotateFile),
+    //archivo legible para humanos
+    new winston.transports.File(options.readableFile),
+    // log de errores en un archivo por separado
+    new winston.transports.File(options.errorFile),
+    // log para consola de desarrollo (colores y formatos)
+    new winston.transports.Console(options.console),
+  ],
+  //Captura de excepciones
+  exceptionHandlers: [
+    new winston.transport.File({
+      filename: path.join(logsDir, "exceptions.log"),
+    }),
+  ],
+  rejectionHandlers: [
+    new winston.transport.File({
+      filename: path.join(logsDir, "rejections.log"),
+    }),
+  ],
+  exitOnError: false,
+});
+
+//Finalmenteexportamos el logger
+export default logger;
