@@ -6,14 +6,15 @@
   "scripts": {
     "start": "NODE_ENV=production node ./server/bin/www",
     "dev": "DEBUG=dwssr-2026a:* nodemon ./server/bin/www",
-    "dev:vite": "vite",
+    "dev:vite": "vite --host",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:vite\"",
     "build:front": "vite build",
     "preview": "npm run build:front && npm run start",
     "lint": "npm run lint:back && npm run lint:front",
     "lint:back": "eslint \"server/**/*.js\"",
     "lint:front": "eslint \"src/**/*.{js,ts}\"",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "clean:logs": "rm -rf ./server/logs/*.log"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -23,7 +24,8 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "vite": "^7.3.1",
-    "winston": "^3.19.0"
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

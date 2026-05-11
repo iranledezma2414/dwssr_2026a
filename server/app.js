@@ -1,49 +1,57 @@
 import createError from "http-errors";
 import express from "express";
-import path from "path";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import { fileURLToPath } from "url";
-import hbs from "hbs";
+//importando Winston Logger
 import logger from "./lib/winston.js";
-// Importando enrutadores
+import hbs from "hbs";
+
+// Importar las rutas
 import indexRouter from "#routes/index.js";
 import usersRouter from "#routes/users.js";
 import authorRouter from "#routes/author.js";
+
 // Importando el registrador de Helpers
 import { registerViteHelper } from "./lib/vite.js";
 
-// Recreando variable de path
+// recreando variables de path
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 var app = express();
 
-//view engine setup
+// view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
+
 // Registrando el Helper para el ENGINE
 registerViteHelper(hbs);
 
-// Redirgiendo el flujo de logs de morgan a winston
+//Redirigiendo el flujo de logs de morgan a winston
+// morgan -> [logs] -> winston -> transportes [consola, archivos]
 app.use(
   morgan("dev", {
     stream: {
-      write: (msg) => logger.info(msg.trim()),
+      write: (msg) => logger.http(msg.trim()),
     },
   }),
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 // Archivos estaticos de Vite
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "..", "dist")));
 }
-//Archivo estatico del backend
-app.use(express.static(path.join(__dirname, "...", "public")));
 
-app.use("/", indexRouter);
+// Archivos estaticos del back-end
+app.use(express.static(path.join(__dirname, "../public")));
+
+// Registrando las rutas
+app.use(["/", "/index"], indexRouter);
 app.use("/users", usersRouter);
 app.use("/author", authorRouter);
 
@@ -64,4 +72,5 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
+//module.exports = app;
 export default app;

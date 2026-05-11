@@ -114,12 +114,12 @@ const logger = winston.createLogger({
   ],
   //Captura de excepciones
   exceptionHandlers: [
-    new winston.transport.File({
+    new winston.transports.File({
       filename: path.join(logsDir, "exceptions.log"),
     }),
   ],
   rejectionHandlers: [
-    new winston.transport.File({
+    new winston.transports.File({
       filename: path.join(logsDir, "rejections.log"),
     }),
   ],
