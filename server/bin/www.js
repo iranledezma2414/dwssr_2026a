@@ -17,7 +17,7 @@ import logger from "../lib/winston.js";
  */
 
 // 2. REEMPLAZANDO console.info POR logger.info
-logger.info("🚀 Starting server...");
+logger.info("Puerto normalizado");
 var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 logger.info("Server will listen on port " + port);
@@ -25,7 +25,7 @@ logger.info("Server will listen on port " + port);
 /**
  * Create HTTP server.
  */
-
+logger.info("Creating HTTP server on port " + port);
 var server = http.createServer(app);
 
 /**
@@ -70,7 +70,7 @@ function onError(error) {
   switch (error.code) {
     case "EACCES":
       // 3. REEMPLAZANDO console.error POR logger.error
-      logger.error(bind + " requires elevated privileges");
+      logger.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case "EADDRINUSE":
@@ -92,5 +92,5 @@ function onListening() {
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
 
   // 4. REEMPLAZANDO console.log POR logger.info
-  logger.info("Listening on " + bind);
+  logger.info(`✅ Listening on ${bind}`);
 }
