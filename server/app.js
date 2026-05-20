@@ -6,15 +6,15 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 //importando Winston Logger
 import logger from "./lib/winston.js";
-import hbs from "hbs";
+// Importando el motor de plantillas
 
 // Importar las rutas
 import indexRouter from "#routes/index.js";
 import usersRouter from "#routes/users.js";
 import authorRouter from "#routes/author.js";
 
-// Importando el registrador de Helpers
-import { registerViteHelper } from "./lib/vite.js";
+// importado el configurador de handlebars
+import { configureHandlebars } from "./lib/handlebars.js";
 
 // recreando variables de path
 const __filename = fileURLToPath(import.meta.url);
@@ -22,13 +22,8 @@ const __dirname = path.dirname(__filename);
 
 logger.info("Creando la instancia de express.js");
 var app = express();
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
-
-// Registrando el Helper para el ENGINE
-registerViteHelper(hbs);
+logger.info("Inicia configuración de express");
+configureHandlebars(app);
 
 logger.info("Configurando el middleware de morgan");
 //Redirigiendo el flujo de logs de morgan a winston
